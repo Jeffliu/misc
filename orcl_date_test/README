@@ -1,0 +1,38 @@
+This is a simple project to test Oracle 9i 10g JDBC driver DATE type's
+ time components missing  problem. You can find details at the following
+ web pages:
+  http://old.nabble.com/Re%3A-Oracle-SQL-DATE-conversion-problem-using-iBATIS-via-Java-JDBC-p21112960.html
+  http://www.weask.us/entry/oracle-sql-date-conversion-problem-ibatis-java-jdbc
+  http://lstierneyltd.com/blog/development/examples/using-ibatis-typehandlers-to-fix-oracle-date-missing-time/
+
+Obviously, when you work with ibatis, all you need to solve the bug is
+configure your result map as:
+  <resultMap id="Info2" class="pojo.Info" >
+    <result column="INFO_BEGIN" property="begin" jdbcType="date" />
+    <result column="INFO_END" property="end" jdbcType="date"/>
+  </resultMap>
+The key point is that NOT to specify jdbcType="DATE"! If "date" it works;
+if "DATE", the bug appears.
+
+The running logs:
+	start:Thu Jan 01 10:46:40 CST 1970
+	end:Thu Jan 01 10:46:40 CST 1970
+	prepare data........
+
+	USE jdgcType="DATE" result...........................
+	list size(should be 1):9
+	start:Thu Jan 01 00:00:00 CST 1970
+	end:Mon Apr 27 00:00:00 CST 1970
+
+	USE jdgcType="date" result............................
+	list size(should be 1):9
+	start:Thu Jan 01 10:46:40 CST 1970
+	end:Mon Apr 27 01:46:40 CST 1970
+
+How to run:
+ 1) import the project to eclipse;
+ 2) edit the src/database.properties to set jdbc configurations
+ 3) execute the sql in createtesttable.sql
+ 4) run the main.Main()
+
+contact me: liuzhaoren <at> gmail.com

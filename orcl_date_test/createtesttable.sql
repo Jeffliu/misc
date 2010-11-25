@@ -1,0 +1,1 @@
+create table TEST_T (INFO_BEGIN DATE, INFO_END DATE);
