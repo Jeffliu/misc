@@ -1,0 +1,39 @@
+The subproject is a test about volatile keyword on Java platform. It compares performance among volatile, java.util.concurrent.atomic.* and synchronized. See more details at http://blog.xiping.me/2010/12/java-volatile-is-not-so-evil.html .
+
+To run the benchmark, run ant to compile it:
+ ant
+Or you can specify the target as following:
+ ant -Dtarget=1.6
+The default target is 1.6.
+
+Then, run the benchmark by typing:
+ java -cp ./bin me.xiping.volitileverify.SystemTimerUserThreads 10000000
+The last number is total run times, default value is 1000000. You can vary it with different numbers to get more reasonable results. 
+
+==================================
+Some results on my notebook.
+
+java 1.6.2_13
+os win7
+CPU intel core2 T7500, 2core, x386
+
+target 1.5:
+$ java -cp ./bin me.xiping.volitileverify.SystemTimerUserThreads 10000000
+V1(volatile):498
+V2(Synchronized):7807
+V3(AtomicLong):1014
+$ java -cp ./bin me.xiping.volitileverify.SystemTimerUserThreads 1000000
+V1(volatile):44
+V2(Synchronized):760
+V3(AtomicLong):81
+
+target 1.6:
+$ java -cp ./bin me.xiping.volitileverify.SystemTimerUserThreads 10000000
+V1(volatile):316
+V2(Synchronized):8107
+V3(AtomicLong):730
+$ java -cp ./bin me.xiping.volitileverify.SystemTimerUserThreads 1000000
+V1(volatile):46
+V2(Synchronized):788
+V3(AtomicLong):113
+
