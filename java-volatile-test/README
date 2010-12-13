@@ -1,6 +1,6 @@
-The subproject is a test about volatile keyword on Java platform. It compares performance among volatile, java.util.concurrent.atomic.* and synchronized. See more details at http://blog.xiping.me/2010/12/java-volatile-is-not-so-evil.html .
+The subproject is a test about volatile keyword on Java platform with multiple preprocessor. It compares performance among volatile, java.util.concurrent.atomic.* and synchronized. See more details at http://blog.xiping.me/2010/12/java-volatile-is-not-so-evil.html .
 
-To run the benchmark, run ant to compile it:
+Before running the benchmark, run ant to compile it:
  ant
 Or you can specify the target as following:
  ant -Dtarget=1.6
@@ -8,32 +8,63 @@ The default target is 1.6.
 
 Then, run the benchmark by typing:
  java -cp ./bin me.xiping.volitileverify.SystemTimerUserThreads 10000000
-The last number is total run times, default value is 1000000. You can vary it with different numbers to get more reasonable results. 
+The last number is total running times, default value is 1000000. You can vary it with different numbers to get more reasonable results. 
 
 ==================================
 Some results on my notebook.
 
-java 1.6.2_13
-os win7
-CPU intel core2 T7500, 2core, x386
+1).
+ java 1.6.2_13
+ os win7
+ CPU intel core2 T7500, 2core, x386
 
-target 1.5:
-$ java -cp ./bin me.xiping.volitileverify.SystemTimerUserThreads 10000000
-V1(volatile):498
-V2(Synchronized):7807
-V3(AtomicLong):1014
-$ java -cp ./bin me.xiping.volitileverify.SystemTimerUserThreads 1000000
-V1(volatile):44
-V2(Synchronized):760
-V3(AtomicLong):81
+ target 1.5:
 
-target 1.6:
-$ java -cp ./bin me.xiping.volitileverify.SystemTimerUserThreads 10000000
-V1(volatile):316
-V2(Synchronized):8107
-V3(AtomicLong):730
-$ java -cp ./bin me.xiping.volitileverify.SystemTimerUserThreads 1000000
-V1(volatile):46
-V2(Synchronized):788
-V3(AtomicLong):113
+ $ java -cp ./bin me.xiping.volitileverify.SystemTimerUserThreads 10000000
+ V1(volatile):498
+ V2(Synchronized):7807
+ V3(AtomicLong):1014
+
+ $ java -cp ./bin me.xiping.volitileverify.SystemTimerUserThreads 1000000
+ V1(volatile):44
+ V2(Synchronized):760
+ V3(AtomicLong):81
+
+ target 1.6:
+
+ $ java -cp ./bin me.xiping.volitileverify.SystemTimerUserThreads 10000000
+ V1(volatile):316
+ V2(Synchronized):8107
+ V3(AtomicLong):730
+
+ $ java -cp ./bin me.xiping.volitileverify.SystemTimerUserThreads 1000000
+ V1(volatile):46
+ V2(Synchronized):788
+ V3(AtomicLong):113
+
+2).
+ java 
+ 	java version "1.6.0_18"
+ 	OpenJDK Runtime Environment (IcedTea6 1.8.2) (6b18-1.8.2-4ubuntu2)
+ 	OpenJDK Server VM (build 16.0-b13, mixed mode)
+ os:
+    Linux catlinux 2.6.32-24-generic #43-Ubuntu SMP Thu Sep 16 14:17:33 UTC 2010 i686 GNU/Linux
+ cpu: 
+    Intel(R) Core(TM)2 Duo CPU     E8200  @ 2.66GHz
+
+ target 1.6:
+ jeff@catlinux:~/java-volatile-test$ java -cp ./bin me.xiping.volitileverify.SystemTimerUserThreads 10000000
+ V1(volatile):87
+ V2(Synchronized):2300
+ V3(AtomicLong):123
+
+ jeff@catlinux:~/java-volatile-test$ java -cp ./bin me.xiping.volitileverify.SystemTimerUserThreads 1000000
+ V1(volatile):24
+ V2(Synchronized):239
+ V3(AtomicLong):27
+
+ jeff@catlinux:~/java-volatile-test$ java -cp ./bin me.xiping.volitileverify.SystemTimerUserThreads 100000000
+ V1(volatile):425
+ V2(Synchronized):22758
+ V3(AtomicLong):1109
 
