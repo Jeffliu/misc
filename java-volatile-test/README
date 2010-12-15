@@ -1,5 +1,8 @@
 The subproject is a test about volatile keyword on Java platform with multiple preprocessor. It compares performance among volatile, java.util.concurrent.atomic.* and synchronized. See more details at http://blog.xiping.me/2010/12/java-volatile-is-not-so-evil.html .
 
+==================================
+Run Benchmarks
+
 Before running the benchmark, run ant to compile it:
  ant
 Or you can specify the target as following:
@@ -9,6 +12,20 @@ The default target is 1.6.
 Then, run the benchmark by typing:
  java -cp ./bin me.xiping.volitileverify.SystemTimerUserThreads 10000000
 The last number is total running times, default value is 1000000. You can vary it with different numbers to get more reasonable results. 
+
+==================================
+Auto run tests and generate charts
+
+You can use the following script to run tests automately.
+$ ./batchRun.sh --help
+Run a benchmark. You can specify run times by giving a numberic parameter, the default value is 10000000.
+
+You can generate a Google chart URL from a result file.
+$ ./genChart.sh --help
+Generate a Google chart apis URL. You need to specify a result file.
+
+Or you can combine these two scripts to run a tests and get a chart as following:
+$ ./batchRun.sh 10000000 | ./genChart.sh
 
 ==================================
 Some results on my notebook.
